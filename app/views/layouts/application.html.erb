@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Photogram SIGNIN</title>
+    <%= csrf_meta_tags %>
+
+    <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
+    <meta charset="utf-8">
+
+    <!-- Connect Font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+    <link rel="stylesheet" href="/light.css">
+  </head>
+
+  <body>
+    <nav>
+      <div>
+        <a href="/">
+          <i class="fab fa-firstdraft fa-fw"></i>
+
+          Home
+        </a>
+      </div>
+
+      <div>
+        <a href="/new_photo_form">
+          <i class="fas fa-plus fa-fw"></i>
+
+          Add a photo
+        </a>
+      </div>
+
+      <div>
+        <a href="/recent">
+          <i class="fas fa-clock fa-fw"></i>
+
+          Recent
+        </a>
+      </div>
+
+      <div>
+        <a href="/popular">
+          <i class="fas fa-fire fa-fw"></i>
+
+          Popular
+        </a>
+      </div>
+
+      <div>
+        <a href="/users">
+          <i class="fas fa-users"></i>
+
+          All Users
+        </a>
+      </div>
+
+      <hr>
+
+      <% if current_user.blank? %>
+        <div>
+          <a href="/users/sign_in">
+            Sign in
+          </a>
+        </div>
+
+        <div>
+          <a href="/users/sign_up">
+            Sign up
+          </a>
+        </div>
+      <% else %>
+        <div>
+          <a href="/users/edit">
+            Edit profile
+          </a>
+        </div>
+
+        <div>
+          <a href="/users/sign_out" data-method="delete">
+            Sign out
+          </a>
+        </div>
+      <% end %>
+    </nav>
+
+    <%= yield %>
+  </body>
+</html>

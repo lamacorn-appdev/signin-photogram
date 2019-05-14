@@ -1,0 +1,40 @@
+<%= render("user_templates/details_nav.html.erb") %>
+
+<h2>Following (<%= @user.following.count %>)</h2>
+
+<ul>
+  <% @user.accepted_sent_follow_requests.order({ :updated_at => :asc }).each do |follow_request| %>
+    <li><%= follow_request.recipient.username %></li>
+  <% end %>
+</ul>
+
+<h2>Pending sent requests (<%= @user.sent_follow_requests.where({ :status => "pending" }).count %>)</h2>
+
+<ul>
+  <% @user.sent_follow_requests.where({ :status => "pending" }).each do |follow_request| %>
+    <li><%= follow_request.recipient.username %></li>
+  <% end %>
+</ul>
+
+<h2>Send follow request</h2>
+
+<form action="/create_follow_request_record">
+  <input type="hidden" name="sender_id" value="<%= @user.id %>">
+
+  <label for="user_dropdown">Recipient</label>
+  <select id="user_dropdown" name="recipient_id">
+    <% User.where.not({ :id => @user.id }).where.not({ :id => @user.sent_follow_requests.pluck(:recipient_id) }).order({ :username => :asc }).each do |a_user| %>
+      <option value="<%= a_user.id %>">
+        <%= a_user.username %>
+
+        <% if a_user.private == false %>
+          (Public)
+        <% else %>
+          (Private)
+        <% end %>
+      </option>
+    <% end %>
+  </select>
+
+  <button>Follow</button>
+</form>

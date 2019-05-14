@@ -1,0 +1,20 @@
+<h1><%= @user.username %></h1>
+
+<dl>
+  <dt>Followers</dt>
+  <dd><%= @user.followers.count %></dd>
+
+  <dt>Following</dt>
+  <dd><%= @user.following.count %></dd>
+</dl>
+
+<nav>
+  <ul>
+    <li><a href="/users/<%= @user.id %>">Own photos</a></li>
+    <li><a href="/users/<%= @user.id %>/liked">Liked photos</a></li>
+    <li><a href="/users/<%= @user.id %>/feed">Feed</a></li>
+    <li><a href="/users/<%= @user.id %>/discover">Discover</a></li>
+    <li><a href="/users/<%= @user.id %>/followers">Followers</a></li>
+    <li><a href="/users/<%= @user.id %>/following">Following</a></li>
+  </ul>
+</nav>

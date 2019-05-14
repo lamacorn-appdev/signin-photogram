@@ -1,0 +1,20 @@
+<h1>Add a new photo</h1>
+
+<form action="/create_photo_record">
+  <label for="image_input">Image URL</label>
+  <input id="image_input" type="text" name="pic_image" placeholder="Enter a URL for the image...">
+
+  <label for="caption_box">Caption</label>
+  <textarea id="caption_box" name="pic_caption" placeholder="Enter a caption for the photo..."></textarea>
+
+  <label for="user_dropdown">Owner</label>
+  <select id="user_dropdown" name="poster_id" >
+    <% User.all.order({ :username => :asc }).each do |a_user| %>
+      <option value="<%= a_user.id %>">
+        <%= a_user.username %>
+      </option>
+    <% end %>
+  </select>
+
+  <button>Add photo</button>
+</form>
