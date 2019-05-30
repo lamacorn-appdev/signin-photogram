@@ -55,7 +55,7 @@ describe "/photos/[ID] — Add comment form" do
     photo = Photo.new
     photo.image = test_image
     photo.caption = test_caption
-    photo.owner_id = user.id
+    photo.owner_id = second_user.id
     photo.save
 
     visit "/photos/#{photo.id}"
