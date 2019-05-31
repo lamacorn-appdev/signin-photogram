@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
     comment = Comment.new
     comment.photo_id = params.fetch("picture_id")
     comment.author_id = params.fetch("commenter_id")
+    
     comment.body = params.fetch("comment_text")
 
     comment.save

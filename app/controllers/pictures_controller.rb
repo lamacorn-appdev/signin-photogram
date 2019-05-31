@@ -1,4 +1,20 @@
 class PicturesController < ApplicationController
+
+
+#  before_action :must_sign_in
+ 
+ #this is so common, there's a common method 
+  # def must_sign_in
+  #   if current_user == nil
+  #   redirect_to("/users/sign_in")
+  #   end
+  # end
+ 
+ #you can put this here, but it's better in the ApplicationController: 
+#  before_action(:authenticate_user!, { :only => [:save_new_row, :save_old_row ]})
+  
+  skip_before_action :authenticate_user!, :only => [:recent, :popular]
+  
   def recent
     @photos = Photo.all.order({ :created_at => :desc }).limit(25)
 
@@ -35,7 +51,9 @@ class PicturesController < ApplicationController
     picture = Photo.new
     picture.image = params.fetch("pic_image")
     picture.caption = params.fetch("pic_caption")
-    picture.owner_id = params.fetch("poster_id")
+    # picture.owner_id = params.fetch("poster_id")
+
+
 
     picture.save
 

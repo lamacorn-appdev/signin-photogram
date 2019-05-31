@@ -30,20 +30,13 @@
   <dd>
     <form action="/create_like_record">
       <input type="hidden" value="<%= @pic.id %>" name="picture_id">
+     <input type="hidden" value="<%= current_user.id %>" name="fan_id">
 
-      <label for="fan_dropdown">Person</label>
-      <select id="fan_dropdown" name="person_id" >
-        <% User.all.order({ :username => :asc }).each do |a_user| %>
-          <option value="<%= a_user.id %>">
-            <%= a_user.username %>
-          </option>
-        <% end %>
-      </select>
-
-      <button>Add fan</button>
+      <button>Like this!</button>
     </form>
   </dd>
 
+<% if current_user.id == @pic.owner_id %>
   <dt>Danger Zone</dt>
   <dd>
     <nav>
@@ -61,6 +54,7 @@
     </nav>
   </dd>
 </dl>
+<% end %>
 
 <h2>Comments</h2>
 
@@ -92,15 +86,7 @@
 
 <form action="/create_comment_record">
   <input type="hidden" value="<%= @pic.id %>" name="picture_id">
-
-  <label for="author_dropdown">Commenter</label>
-  <select id="author_dropdown" name="commenter_id" >
-    <% User.all.order({ :username => :asc }).each do |a_user| %>
-      <option value="<%= a_user.id %>">
-        <%= a_user.username %>
-      </option>
-    <% end %>
-  </select>
+  <input type="hidden" value="<%= current_user.id %>" name="commenter_id">
 
   <label for="comment_box">Comment</label>
   <textarea id="comment_box" name="comment_text" placeholder="Enter a comment..."></textarea>

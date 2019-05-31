@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   match("/", { :controller => "pictures", :action => "recent", :via => "get" })
 
@@ -39,6 +40,16 @@ Rails.application.routes.draw do
   match("/create_follow_request_record", { :controller => "follow_requests", :action => "save_new_row", :via => "get" })
 
   match("/update_follow_request_record/:modify_id", { :controller => "follow_requests", :action => "save_old_row", :via => "get" })
+
+
+#NOTES FROM COOKIES
+# rails generate controller game puzzle store_cookies
+
+#assumes a lot of stuff
+  get 'game/puzzle'
+  get 'game/store_cookies'
+
+
 
   # The routes below are for the ActiveAdmin dashboard located at /admin. You can ignore them.
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -2,8 +2,8 @@ class LikesController < ApplicationController
   def save_new_row
     like = Like.new
     like.photo_id = params.fetch("picture_id")
-    like.fan_id = params.fetch("person_id")
-
+    like.fan_id = params.fetch("fan_id")
+    
     like.save
 
     photo = Photo.where({ :id => like.photo_id }).at(0)
